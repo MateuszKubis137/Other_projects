@@ -156,12 +156,12 @@ WHERE
         SELECT DISTINCT bands.name 
         FROM bands
 	    JOIN albums ON albums.band_id = bands.id
-	    WHERE albums.band_id IN (
-		SELECT band_id 
-                FROM albums 
-                GROUP BY band_id 
-                having count(*) > 1
-                ) 
+	WHERE albums.band_id IN (
+            SELECT band_id 
+            FROM albums 
+            GROUP BY band_id 
+            having count(*) > 1
+            ) 
         )
     AND songs.length > (
 	SELECT AVG(length) 
