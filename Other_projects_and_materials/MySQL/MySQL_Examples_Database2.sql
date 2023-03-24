@@ -131,33 +131,33 @@ ORDER BY release_year DESC LIMIT 5;
 DELETE songs.* FROM songs 
 JOIN albums ON songs.album_id = albums.id
 WHERE albums.release_year < '1990'
-	OR albums.release_year IS NULL;
+    OR albums.release_year IS NULL;
 
 DELETE FROM albums
 WHERE albums.release_year < '1990'
-	OR albums.release_year IS NULL;
+    OR albums.release_year IS NULL;
 
 # Select songs that are above the average length (in seconds) of all songs in the database, and are released by bands with at least two albums.
 select
-	bands.name,
+    bands.name,
     albums.name,
-	songs.name,
+    songs.name,
     ROUND((songs.length * 60), 0) `length in seconds`
 FROM songs
-	INNER JOIN albums ON songs.album_id = albums.id 
-	INNER JOIN bands ON albums.band_id = bands.id
+    INNER JOIN albums ON songs.album_id = albums.id 
+    INNER JOIN bands ON albums.band_id = bands.id
 WHERE 
-	bands.name IN (
-		SELECT DISTINCT bands.name 
+    bands.name IN (
+        SELECT DISTINCT bands.name 
         FROM bands
-		JOIN albums ON albums.band_id = bands.id
-		WHERE albums.band_id IN (
-			SELECT band_id 
-            FROM albums 
-            GROUP BY band_id 
-            having count(*) > 1
-            ) 
+	    JOIN albums ON albums.band_id = bands.id
+	    WHERE albums.band_id IN (
+		SELECT band_id 
+                FROM albums 
+                GROUP BY band_id 
+                having count(*) > 1
+                ) 
 		)
 	AND songs.length > (
-		SELECT AVG(length) 
+	    SELECT AVG(length) 
         FROM songs);
