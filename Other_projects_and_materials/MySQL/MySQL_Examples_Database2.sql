@@ -76,7 +76,9 @@ SELECT
     b.name, 
     count(s.id) number_of_songs 
 FROM bands b, albums a, songs s 
-WHERE b.id = a.band_id AND a.id = s.album_id 
+WHERE 
+    b.id = a.band_id 
+    AND a.id = s.album_id 
 GROUP  BY b.name;
 
 # Calculate the average length of songs that come from albums with a release year between 1995 and 2010 and start with the letter 'T' for each band.
@@ -87,7 +89,8 @@ SELECT
 FROM bands
     INNER JOIN albums ON albums.band_id = bands.id
     INNER JOIN songs on albums.id=songs.album_id
-where release_year between 1995 AND 2010
+where 
+    release_year between 1995 AND 2010
     AND songs.name like "T%"
 GROUP BY bands.name
 ORDER BY 'Average length';
@@ -130,11 +133,13 @@ ORDER BY release_year DESC LIMIT 5;
 # Delete all songs and albums that were released before 1990 or have no release year information.
 DELETE songs.* FROM songs 
 JOIN albums ON songs.album_id = albums.id
-WHERE albums.release_year < '1990'
+WHERE 
+    albums.release_year < '1990'
     OR albums.release_year IS NULL;
 
 DELETE FROM albums
-WHERE albums.release_year < '1990'
+WHERE 
+    albums.release_year < '1990'
     OR albums.release_year IS NULL;
 
 # Select songs that are above the average length (in seconds) of all songs in the database, and are released by bands with at least two albums.
@@ -157,7 +162,7 @@ WHERE
                 GROUP BY band_id 
                 having count(*) > 1
                 ) 
-		)
-	AND songs.length > (
-	    SELECT AVG(length) 
+        )
+    AND songs.length > (
+	SELECT AVG(length) 
         FROM songs);
