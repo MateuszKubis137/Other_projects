@@ -3,13 +3,13 @@
 # Which official languages are the most commonly used in Europe?
 # Soultion using subquery
 SELECT 
-    language, 
-    COUNT(*) liczba
+	language, 
+	COUNT(*) liczba
 FROM countrylanguage
 WHERE 
 	IsOfficial = 'T'
 	AND countrycode IN (
-		SELECT code FROM country WHERE continent = 'Europe')
+	SELECT code FROM country WHERE continent = 'Europe')
 GROUP BY language
 ORDER BY liczba DESC;
 
