@@ -39,10 +39,10 @@ WHERE
         SELECT MAX(population) 
         FROM country 
         WHERE 
-		    continent = 'Europe' 
-			AND name <> 'Russian Federation')
+            continent = 'Europe' 
+            AND name <> 'Russian Federation')
     AND ROUND(population/surfaceArea, 2) > ALL (
-	    SELECT ROUND(population/surfaceArea, 2) 'density' 
+        SELECT ROUND(population/surfaceArea, 2) 'density' 
         FROM country 
         WHERE continent = 'Africa' 
         order by `density` desc);
@@ -80,7 +80,7 @@ FROM countrylanguage
 WHERE language IN (
     SELECT language 
     FROM (
-	    SELECT language, COUNT(*) `number of countries`
+        SELECT language, COUNT(*) `number of countries`
         FROM countrylanguage 
         WHERE IsOfficial = 'F' 
         GROUP BY language
@@ -101,7 +101,7 @@ FROM (
     SELECT 
 	country.name, 
         ANY_VALUE(continent) Continent, 
-		AVG(city.population) avg_population
+	AVG(city.population) avg_population
     FROM city 
         INNER JOIN country ON city.CountryCode = country.Code
     WHERE continent IN (
