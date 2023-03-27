@@ -1,4 +1,4 @@
-# The following code depends on a database that is available in a folder named "databases" under the name "database3
+# The following code depends on a database that is available in a folder named "databases" under the name "database3"
 
 
 # Usun zbedne spacje
@@ -72,7 +72,7 @@ SELECT
 	END AS 'modified email'
 FROM klienci;
 
-# INNER JOIN
+# INNER JOIN przyklad uzycia
 SELECT
     klienci.kod_klienta,
     wypozyczenia.data_zwr,
@@ -88,6 +88,15 @@ FROM klienci
     INNER JOIN pracownicy ON wypozyczenia.id_pracownika = pracownicy.id_pracownika
 ORDER BY ilosc_dob;
 
+# LEFT JOIN
+# Wybierz pracownikkow, ktorzy nie zrealizowali ani jednego wypozyczenia auta
+SELECT
+    p.imie_pracownika,
+    p.nazwisko_pracownika
+FROM pracownicy p
+    LEFT JOIN wypozyczenia w ON p.id_pracownika = w.id_pracownika
+    WHERE w.id_wypozyczenia IS NULL;
+
 # Wyswietl informacje o wypozyczeniach obslugiwane przez pracownika o nazwisku Nowacki
 SELECT
     nazwisko_pracownika,
@@ -100,15 +109,6 @@ FROM pracownicy p
     LEFT JOIN dane_wypozyczen dw ON w.id_wypozyczenia=dw.id_wypozyczenia
 WHERE p.nazwisko_pracownika="Nowacki";
 
-# LEFT JOIN
-# Wybierz pracownikkow, ktorzy nie zrealizowali ani jednego wypozyczenia auta
-SELECT
-    p.imie_pracownika,
-    p.nazwisko_pracownika
-FROM pracownicy p
-    LEFT JOIN wypozyczenia w ON p.id_pracownika = w.id_pracownika
-    WHERE w.id_wypozyczenia IS NULL;
-    
 # RIGHT JOIN
 # wybier samochod, ktory nie zostal jeszcze wypozyczony
 select samochody.id_samochodu, marka, model from dane_wypozyczen
