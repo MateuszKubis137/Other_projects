@@ -1,4 +1,4 @@
-# The following code depends on a database that is available in a folder named "databases" under the name "database1
+# The following code depends on a database that is available in a folder named "databases" under the name "database1"
 
 # Which official languages are the most commonly used in Europe?
 # Soultion using subquery
