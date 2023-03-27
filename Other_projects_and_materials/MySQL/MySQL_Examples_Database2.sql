@@ -10,6 +10,31 @@ FROM bands
 GROUP BY bands.id
 HAVING  `Number of songs` >= 30;
 
+# Select songs that are above the average length (in seconds) of all songs in the database, and are released by bands with at least two albums.
+select
+    bands.name,
+    albums.name,
+    songs.name,
+    ROUND((songs.length * 60), 0) `length in seconds`
+FROM songs
+    INNER JOIN albums ON songs.album_id = albums.id 
+    INNER JOIN bands ON albums.band_id = bands.id
+WHERE 
+    bands.name IN (
+        SELECT DISTINCT bands.name 
+        FROM bands
+	    JOIN albums ON albums.band_id = bands.id
+	WHERE albums.band_id IN (
+            SELECT band_id 
+            FROM albums 
+            GROUP BY band_id 
+            having count(*) > 1
+            ) 
+        )
+    AND songs.length > (
+	SELECT AVG(length) 
+        FROM songs);
+
 # Select all Bands that have No Albums
 SELECT bands.name  
 FROM bands 
@@ -141,28 +166,3 @@ DELETE FROM albums
 WHERE 
     albums.release_year < '1990'
     OR albums.release_year IS NULL;
-
-# Select songs that are above the average length (in seconds) of all songs in the database, and are released by bands with at least two albums.
-select
-    bands.name,
-    albums.name,
-    songs.name,
-    ROUND((songs.length * 60), 0) `length in seconds`
-FROM songs
-    INNER JOIN albums ON songs.album_id = albums.id 
-    INNER JOIN bands ON albums.band_id = bands.id
-WHERE 
-    bands.name IN (
-        SELECT DISTINCT bands.name 
-        FROM bands
-	    JOIN albums ON albums.band_id = bands.id
-	WHERE albums.band_id IN (
-            SELECT band_id 
-            FROM albums 
-            GROUP BY band_id 
-            having count(*) > 1
-            ) 
-        )
-    AND songs.length > (
-	SELECT AVG(length) 
-        FROM songs);
