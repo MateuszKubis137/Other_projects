@@ -25,8 +25,9 @@ WHERE
 GROUP BY language
 ORDER BY liczba DESC;
 
-# Select the names, population, and surface area of all Asian countries, and calculate the population density. The population of each country must be greater than the population of the most populous European country, 
-# and the population density must be greater than the population density of all African countries.
+# Select the names, population, and surface area of all Asian countries, and calculate the population density. The population of each country must be greater than 
+
+# the population of the most populous European country, and the population density must be greater than the population density of all African countries.
 SELECT
     name,
     population,
