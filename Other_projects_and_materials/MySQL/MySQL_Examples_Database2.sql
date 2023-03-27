@@ -1,4 +1,4 @@
-# The following code depends on a database that is available in a folder named "databases" under the name "database2
+# The following code depends on a database that is available in a folder named "databases" under the name "database2"
 
 # Select all Bands that have Albums and at least 30 songs
 SELECT 
