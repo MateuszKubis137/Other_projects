@@ -1,7 +1,7 @@
 # The following code depends on a database that is available in a folder named "databases" under the name "database1"
 
 # Which official languages are the most commonly used in Europe?
-# Soultion using subquery
+# The soultion using subquery
 SELECT 
     language, 
     COUNT(*) liczba
@@ -13,7 +13,7 @@ WHERE
 GROUP BY language
 ORDER BY liczba DESC;
 
-# Solution using join
+# The solution using join
 SELECT 
     language, 
     COUNT(*) liczba
