@@ -89,7 +89,7 @@ FROM klienci
 ORDER BY ilosc_dob;
 
 # LEFT JOIN
-# Wybierz pracownikkow, ktorzy nie zrealizowali ani jednego wypozyczenia auta
+# Wybierz pracownikow, ktorzy nie zrealizowali ani jednego wypozyczenia auta
 SELECT
     p.imie_pracownika,
     p.nazwisko_pracownika
