@@ -110,7 +110,7 @@ FROM pracownicy p
 WHERE p.nazwisko_pracownika="Nowacki";
 
 # RIGHT JOIN
-# wybier samochod, ktory nie zostal jeszcze wypozyczony
+# wybierz samochod, ktory nie zostal jeszcze wypozyczony
 select samochody.id_samochodu, marka, model from dane_wypozyczen
 RIGHT JOIN samochody ON dane_wypozyczen.id_samochodu = samochody.id_samochodu
 WHERE dane_wypozyczen.id_wypozyczenia IS NULL;
